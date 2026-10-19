@@ -1,7 +1,7 @@
 "use client";
 
-import { sendGAEvent } from "@next/third-parties/google";
 import { UTM_KEYS, type UtmParams } from "@/components/campaign/constants";
+import { queueGaEvent } from "@/components/GoogleAnalytics";
 
 const STORAGE_KEY = "recurv_campaign_utms";
 
@@ -40,7 +40,7 @@ export function appendUtms(href: string, utms: UtmParams): string {
 
 export function trackCampaignEvent(name: string, utms: UtmParams) {
   try {
-    sendGAEvent("event", name, utms);
+    queueGaEvent("event", name, utms);
   } catch {
     // GA is optional; missing NEXT_PUBLIC_GA_ID should not break the page.
   }

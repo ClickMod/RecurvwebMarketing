@@ -1,6 +1,6 @@
 "use client";
 
-import { sendGAEvent } from "@next/third-parties/google";
+import { queueGaEvent } from "@/components/GoogleAnalytics";
 
 export type DemoEventName =
   | "demo_started"
@@ -16,7 +16,7 @@ export function trackDemoEvent(
   params?: Record<string, string | number>,
 ) {
   try {
-    sendGAEvent("event", name, params ?? {});
+    queueGaEvent("event", name, params ?? {});
   } catch {
     // GA is optional; a missing measurement ID should not break the page.
   }
