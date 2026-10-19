@@ -301,7 +301,6 @@ export default async function BlogPostPage({ params }: Props) {
             <div
               className="relative w-full overflow-hidden"
               style={{
-                maxHeight: 480,
                 aspectRatio:
                   post.heroImage.width && post.heroImage.height
                     ? `${post.heroImage.width} / ${post.heroImage.height}`
@@ -313,7 +312,7 @@ export default async function BlogPostPage({ params }: Props) {
                 alt={post.heroImage.alternativeText ?? post.title}
                 fill
                 sizes="100vw"
-                className="object-cover object-center"
+                className="object-cover object-top"
                 priority
               />
             </div>
