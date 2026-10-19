@@ -19,7 +19,9 @@ function textFromChildren(children: ReactNode): string {
   if (Array.isArray(children)) {
     return children.map(textFromChildren).join("");
   }
-  if (isValidElement<{ children?: ReactNode }>(children)) {
+  if (isValidElement<{ children?: ReactNode; text?: string | null }>(children)) {
+    // Strapi's Text node stores the phrase on `text`, not `children`.
+    if (typeof children.props.text === "string") return children.props.text;
     return textFromChildren(children.props.children);
   }
   return "";

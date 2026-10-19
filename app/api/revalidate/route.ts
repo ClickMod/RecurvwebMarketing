@@ -53,6 +53,7 @@ export async function POST(req: NextRequest) {
     revalidatePath("/industries", "layout");
     revalidateTag("blog-listing", NOW);
     revalidateTag("/blog-posts", NOW);
+    revalidatePath("/sitemap.xml");
   } else if (model === "blog-category") {
     revalidatePath("/blog", "page");
     revalidatePath("/", "page");

@@ -362,6 +362,36 @@ async function strapiGet<T>(path: string, options?: StrapiGetOptions): Promise<T
   return res.json() as Promise<T>;
 }
 
+/**
+ * Strapi `config/api.js` maxLimit. A larger pageSize is silently truncated,
+ * so every full-catalogue read must walk pages of this size.
+ */
+const STRAPI_PAGE_SIZE = 100;
+
+/**
+ * Follows `meta.pagination.pageCount` until every row is collected.
+ * `path` must already include a stable sort and must not set pagination.
+ */
+async function strapiGetAll<T>(path: string, options?: StrapiGetOptions): Promise<T[]> {
+  const items: T[] = [];
+  let page = 1;
+
+  for (;;) {
+    const joiner = path.includes("?") ? "&" : "?";
+    const res = await strapiGet<StrapiListResponse<T>>(
+      `${path}${joiner}pagination[page]=${page}&pagination[pageSize]=${STRAPI_PAGE_SIZE}`,
+      options,
+    );
+    const batch = res.data ?? [];
+    items.push(...batch);
+    const pageCount = res.meta?.pagination?.pageCount ?? page;
+    if (page >= pageCount || batch.length === 0) break;
+    page += 1;
+  }
+
+  return items;
+}
+
 // ── Blog content types ────────────────────────────────────────────────────────
 
 export interface StrapiBlogCategory {
@@ -456,6 +486,9 @@ export async function getFeaturedBlogPost(): Promise<StrapiBlogPost | null> {
   return res.data[0] ?? null;
 }
 
+/** Page size for the public /blog listing. Sitemap pagination must use the same value. */
+export const BLOG_LISTING_PAGE_SIZE = 12;
+
 /**
  * Fetches paginated blog posts for the /blog listing page.
  * Supports optional category filter, sort direction, and pagination.
@@ -465,7 +498,7 @@ export async function getAllBlogPosts({
   tagSlug,
   sort = "latest",
   page = 1,
-  pageSize = 12,
+  pageSize = BLOG_LISTING_PAGE_SIZE,
   excludeId,
 }: {
   categorySlug?: string;
@@ -514,14 +547,14 @@ export async function getAllBlogCategoriesWithCounts(): Promise<StrapiBlogCatego
       "/blog-categories?fields[0]=name&fields[1]=slug&sort=name:asc&pagination[pageSize]=100",
       { revalidate: 3600, tags: ["blog-categories"] }
     ),
-    strapiGet<StrapiListResponse<{ id: number; category: { id: number } | null }>>(
-      "/blog-posts?fields[0]=id&populate[category][fields][0]=id&pagination[pageSize]=1000&status=published",
+    strapiGetAll<{ id: number; category: { id: number } | null }>(
+      "/blog-posts?fields[0]=id&populate[category][fields][0]=id&sort[0]=id:asc&status=published",
       { revalidate: 3600, tags: ["blog-listing"] }
     ),
   ]);
 
   const countMap: Record<number, number> = {};
-  for (const post of postsRes.data) {
+  for (const post of postsRes) {
     const catId = post.category?.id;
     if (catId !== undefined) countMap[catId] = (countMap[catId] ?? 0) + 1;
   }
@@ -543,14 +576,14 @@ export async function getAllBlogTagsWithCounts(): Promise<StrapiBlogTagWithCount
       "/blog-tags?fields[0]=name&fields[1]=slug&sort=name:asc&pagination[pageSize]=100",
       { revalidate: 3600, tags: ["blog-tags"] }
     ),
-    strapiGet<StrapiListResponse<{ id: number; tags: { id: number }[] | null }>>(
-      "/blog-posts?fields[0]=id&populate[tags][fields][0]=id&pagination[pageSize]=1000&status=published",
+    strapiGetAll<{ id: number; tags: { id: number }[] | null }>(
+      "/blog-posts?fields[0]=id&populate[tags][fields][0]=id&sort[0]=id:asc&status=published",
       { revalidate: 3600, tags: ["blog-listing"] }
     ),
   ]);
 
   const countMap: Record<number, number> = {};
-  for (const post of postsRes.data) {
+  for (const post of postsRes) {
     for (const tag of post.tags ?? []) {
       countMap[tag.id] = (countMap[tag.id] ?? 0) + 1;
     }
@@ -593,16 +626,32 @@ export async function getBlogPostBySlug(slug: string): Promise<StrapiBlogPost | 
   return null;
 }
 
+const BLOG_SLUG_QUERY =
+  "/blog-posts?fields[0]=slug&fields[1]=updatedAt" +
+  "&sort[0]=publishedAt:desc&sort[1]=id:asc&status=published";
+
 /**
- * Fetches all blog post slugs — used in generateStaticParams for the
- * /blog/[slug] route. Minimal payload (slug only).
+ * Every published blog slug. Pages through Strapi at {@link STRAPI_PAGE_SIZE}
+ * so catalogues past 100 (and past 1,000) are complete. Used by the sitemap.
  */
-export async function getAllBlogSlugsForStaticParams(): Promise<
+export async function getAllBlogSlugs(): Promise<
+  { slug: string; updatedAt: string }[]
+> {
+  return strapiGetAll(BLOG_SLUG_QUERY);
+}
+
+/**
+ * Latest page of slugs for generateStaticParams. Further posts render on
+ * first request (`dynamicParams`) and are still listed in the sitemap.
+ */
+export async function getRecentBlogSlugsForStaticParams(): Promise<
   { slug: string; updatedAt: string }[]
 > {
   const res = await strapiGet<
     StrapiListResponse<Pick<StrapiBlogPost, "slug" | "updatedAt">>
-  >("/blog-posts?fields[0]=slug&fields[1]=updatedAt&pagination[pageSize]=1000");
+  >(
+    `${BLOG_SLUG_QUERY}&pagination[page]=1&pagination[pageSize]=${STRAPI_PAGE_SIZE}`,
+  );
   return res.data;
 }
 

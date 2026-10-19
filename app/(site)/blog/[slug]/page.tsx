@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   getBlogPostBySlug,
-  getAllBlogSlugsForStaticParams,
+  getRecentBlogSlugsForStaticParams,
   getRelatedBlogPosts,
   getIndustryNavList,
   strapiImageUrl,
@@ -27,9 +27,9 @@ import { ContactCallSection } from "@/components/contact/ContactCallSection";
 import { RevenueCtaSection } from "@/components/sections/RevenueCtaSection";
 
 /**
- * Allow slugs that weren't pre-built to be rendered on first request (ISR).
- * New blog posts published in Strapi appear immediately after the first visitor
- * hits the URL — no redeploy needed.
+ * Only the latest page of posts is prerendered. Every other published slug
+ * still renders on first request (ISR) and is listed in the sitemap.
+ * New posts appear without a redeploy.
  */
 export const dynamicParams = true;
 
@@ -39,7 +39,7 @@ interface Props {
 
 export async function generateStaticParams() {
   try {
-    const slugs = await getAllBlogSlugsForStaticParams();
+    const slugs = await getRecentBlogSlugsForStaticParams();
     return slugs.map((s) => ({ slug: s.slug }));
   } catch {
     return [];

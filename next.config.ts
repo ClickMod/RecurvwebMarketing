@@ -43,6 +43,19 @@ const nextConfig: NextConfig = {
       "next/dist/build/polyfills/polyfill-module": polyfillStub,
     },
   },
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Link",
+            value: '</llms.txt>; rel="describedby"',
+          },
+        ],
+      },
+    ];
+  },
   webpack(config) {
     const alias = config.resolve?.alias;
     config.resolve ??= {};

@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import {
-  getAllBlogSlugsForStaticParams,
+  BLOG_LISTING_PAGE_SIZE,
+  getAllBlogSlugs,
   getAllIndustrySlugs,
 } from "@/lib/strapi";
 
@@ -11,7 +12,7 @@ import {
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [blogSlugs, industrySlugs] = await Promise.all([
-    getAllBlogSlugsForStaticParams().catch(() => []),
+    getAllBlogSlugs().catch(() => []),
     getAllIndustrySlugs().catch(() => []),
   ]);
 
@@ -56,6 +57,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  const blogPageCount = Math.ceil(blogSlugs.length / BLOG_LISTING_PAGE_SIZE);
+  const blogListingPages: MetadataRoute.Sitemap = Array.from(
+    { length: Math.max(0, blogPageCount - 1) },
+    (_, index) => ({
+      url: `${SITE_URL}/blog?page=${index + 2}`,
+      lastModified: buildTime,
+      changeFrequency: "weekly" as const,
+      priority: 0.5,
+    }),
+  );
+
   const blogPages: MetadataRoute.Sitemap = blogSlugs.map(({ slug, updatedAt }) => ({
     url: `${SITE_URL}/blog/${slug}`,
     lastModified: new Date(updatedAt),
@@ -70,5 +82,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...blogPages, ...industryPages];
+  return [...staticPages, ...blogListingPages, ...blogPages, ...industryPages];
 }

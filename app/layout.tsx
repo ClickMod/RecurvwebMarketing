@@ -54,6 +54,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${jetbrainsMono.variable}`}
       style={{ background: "#FFFFFF" }}
     >
+      <head>
+        <link rel="describedby" href="/llms.txt" />
+      </head>
       <body style={{ margin: 0, fontFamily: "var(--font-geist-sans), system-ui, sans-serif" }}>
         <script
           type="application/ld+json"

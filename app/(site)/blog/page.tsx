@@ -9,6 +9,7 @@ import { Button } from "@/components/Button";
 import { CmsBlogPostCard } from "@/components/CmsBlogPostCard";
 import { BlogFilters } from "@/components/blog/BlogFilters";
 import {
+  BLOG_LISTING_PAGE_SIZE,
   getAllBlogPosts,
   getAllBlogCategoriesWithCounts,
   getAllBlogTagsWithCounts,
@@ -16,35 +17,80 @@ import {
   strapiImageUrl,
 } from "@/lib/strapi";
 
-interface Props {
-  searchParams: Promise<{ category?: string; tag?: string; sort?: string; page?: string }>;
-}
+const BLOG_INDEX_TITLE = "Field notes on recurring revenue";
+const BLOG_DESCRIPTION =
+  "Practical, vendor-neutral writing on debit orders, payment plans, mandate capture and running a finance team across South Africa.";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description:
-    "Practical, vendor-neutral writing on debit orders, payment plans, mandate capture and running a finance team across South Africa.",
-  alternates: { canonical: "/blog" },
+type BlogListingParams = {
+  category?: string;
+  tag?: string;
+  sort?: string;
+  page?: string;
 };
 
-export default async function BlogPage({ searchParams }: Props) {
-  const { category, tag, sort = "latest", page = "1" } = await searchParams;
-  const pageNum = Math.max(1, parseInt(page) || 1);
-  const sortVal = sort === "oldest" ? "oldest" : "latest";
-  const isFiltered = Boolean(category) || Boolean(tag);
+interface Props {
+  searchParams: Promise<BlogListingParams>;
+}
 
-  // Fetch categories, tags, featured post (unfiltered only), and listing posts in parallel.
-  // ⚠️ Decision point (flagged): the featured card is shown ONLY when no filter is active.
+function blogListingState(params: BlogListingParams): {
+  pageNum: number;
+  sortVal: "latest" | "oldest";
+  hasFacet: boolean;
+  canonical: string;
+  title: string;
+} {
+  const pageNum = Math.max(1, parseInt(params.page ?? "1", 10) || 1);
+  const sortVal = params.sort === "oldest" ? "oldest" : "latest";
+  const hasFacet = Boolean(params.category || params.tag || params.sort);
+  const canonical = pageNum > 1 ? `/blog?page=${pageNum}` : "/blog";
+  const title = pageNum > 1 ? `${BLOG_INDEX_TITLE}, page ${pageNum}` : BLOG_INDEX_TITLE;
+  return { pageNum, sortVal, hasFacet, canonical, title };
+}
+
+function blogListingHref(opts: {
+  category?: string;
+  tag?: string;
+  sort: "latest" | "oldest";
+  page: number;
+}) {
+  const params = new URLSearchParams();
+  if (opts.category) params.set("category", opts.category);
+  if (opts.tag) params.set("tag", opts.tag);
+  if (opts.sort !== "latest") params.set("sort", opts.sort);
+  params.set("page", String(opts.page));
+  return `/blog?${params.toString()}`;
+}
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const { hasFacet, canonical, title } = blogListingState(await searchParams);
+  return {
+    title,
+    description: BLOG_DESCRIPTION,
+    alternates: { canonical },
+    robots: hasFacet
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
+  };
+}
+
+export default async function BlogPage({ searchParams }: Props) {
+  const params = await searchParams;
+  const { category, tag } = params;
+  const { pageNum, sortVal } = blogListingState(params);
+  const isFiltered = Boolean(category) || Boolean(tag);
+  const showFeatured = !isFiltered && pageNum === 1;
+
+  // Fetch categories, tags, featured post (unfiltered first page only), and listing posts in parallel.
   const [categories, tags, featured, { posts, total, pageCount }] = await Promise.all([
     getAllBlogCategoriesWithCounts().catch(() => []),
     getAllBlogTagsWithCounts().catch(() => []),
-    isFiltered ? Promise.resolve(null) : getFeaturedBlogPost().catch(() => null),
+    showFeatured ? getFeaturedBlogPost().catch(() => null) : Promise.resolve(null),
     getAllBlogPosts({
       categorySlug: category,
       tagSlug: tag,
       sort: sortVal,
       page: pageNum,
-      pageSize: 12,
+      pageSize: BLOG_LISTING_PAGE_SIZE,
     }).catch(() => ({ posts: [], total: 0, pageCount: 0 })),
   ]);
 
@@ -305,11 +351,12 @@ export default async function BlogPage({ searchParams }: Props) {
               <div className="flex gap-2 justify-center order-1 md:order-2 md:justify-end">
                 {pageNum > 1 ? (
                   <Link
-                    href={`/blog?${new URLSearchParams({
-                      ...(category ? { category } : {}),
-                      ...(sortVal !== "latest" ? { sort: sortVal } : {}),
-                      page: String(pageNum - 1),
-                    }).toString()}`}
+                    href={blogListingHref({
+                      category,
+                      tag,
+                      sort: sortVal,
+                      page: pageNum - 1,
+                    })}
                     style={{
                       padding: "10px 16px",
                       borderRadius: 999,
@@ -340,11 +387,12 @@ export default async function BlogPage({ searchParams }: Props) {
                 )}
                 {pageNum < pageCount ? (
                   <Link
-                    href={`/blog?${new URLSearchParams({
-                      ...(category ? { category } : {}),
-                      ...(sortVal !== "latest" ? { sort: sortVal } : {}),
-                      page: String(pageNum + 1),
-                    }).toString()}`}
+                    href={blogListingHref({
+                      category,
+                      tag,
+                      sort: sortVal,
+                      page: pageNum + 1,
+                    })}
                     style={{
                       padding: "10px 16px",
                       borderRadius: 999,
