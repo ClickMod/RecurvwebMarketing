@@ -1,0 +1,71 @@
+# Recurv — Extended context for AI assistants
+
+> Recurv is a South African payment-collection platform that handles the collection cycle from digital payment authorisation and scheduling to collection, retries, and reconciliation. It serves organisations collecting membership dues, payment plans, rent, subscriptions, and other scheduled or once-off charges.
+
+This file extends the short index at [llms.txt](https://recurv.tech/llms.txt). For current product details, refer to Recurv’s [homepage](https://recurv.tech/) and [industry pages](https://recurv.tech/industries).
+
+## Company and service
+
+Recurv presents its service for South African businesses. It helps organisations collect payments through digital mandates, configure collection patterns, process card payments or EFT debit orders, monitor outcomes, and reconcile collections. The intended operational benefit is less manual work with authorisations, batch files, payment follow-up, and reconciliation, alongside clearer visibility into collections that need attention.
+
+The public site states that Recurv’s EFT debit-order rails are SARB compliant and that Recurv is PCI DSS Level 1 compliant. These are statements made by Recurv on its website; consult Recurv for the applicable scope, current documentation, and terms.
+
+## Who Recurv serves
+
+Recurv is for South African organisations that collect payments once or on a schedule and need to manage related authorisation, collection, and reconciliation work. Its public site describes use cases for:
+
+- Golf clubs — membership subscriptions, joining fees, and competition entries: [Golf Clubs](https://recurv.tech/industries/golf-clubs).
+- Gyms and fitness studios — memberships and add-on charges: [Gyms & Fitness Studios](https://recurv.tech/industries/gyms-fitness-studios).
+- Homeowners’ associations and estates — fixed levies and variable utility charges: [HOAs & Estates](https://recurv.tech/industries/hoas-and-estates).
+- Landlords and property managers — rent, utilities, and levies: [Landlords & Property Managers](https://recurv.tech/industries/landlords-property-managers).
+- Long-term storage businesses — rental and additional charges: [Long-term Storage](https://recurv.tech/industries/long-term-storage).
+- Preprimary schools and early childhood development centres — tuition, aftercare, and extras: [Preprimary Schools](https://recurv.tech/industries/preprimary-schools).
+- Private security and armed-response providers — monitoring fees and call-out charges: [Security & Armed Response](https://recurv.tech/industries/security-armed-response).
+- Retirement villages and frail-care providers — levies and care fees: [Retirement Villages](https://recurv.tech/industries/retirement-villages).
+- Schools and education organisations — fees, tours, and levies: [Schools & Education](https://recurv.tech/industries/schools).
+- Sports and social clubs — subscriptions, bar accounts, and competition fees: [Sports & Social Clubs](https://recurv.tech/industries/clubs).
+- Timeshare and vacation-ownership resorts — annual levies, instalments, and usage fees: [Timeshare & Resorts](https://recurv.tech/industries/timeshare-resorts).
+
+These are examples from Recurv’s published industry pages, not a guarantee that every billing model or organisation is eligible. Businesses with another recurring collection model can contact Recurv to discuss fit.
+
+## Collection patterns
+
+Recurv’s homepage describes five collection patterns:
+
+- **Once-off collection:** collect a single payment for a charge such as a deposit or registration fee.
+- **Fixed-term collections:** schedule a defined number of payments over a term; the site describes collections stopping automatically at the end of the term.
+- **Ongoing collections:** schedule payments without a predefined end date, until the instruction is cancelled.
+- **Ad hoc fees:** add a one-time charge to an active collection without disrupting its schedule.
+- **Variable amounts:** set a variable amount and update it before a collection run, for example for usage-based billing or levy adjustments.
+
+The organisation’s billing model determines the relevant schedule and amount. Recurv should confirm any account-specific configuration rules or limits.
+
+## How the collection workflow works
+
+1. **Obtain payment authorisation.** The customer authorises a recurring or once-off collection through a digital mandate. Recurv describes sending mandate links by email, SMS, WhatsApp, or QR code, or embedding the mandate experience on the organisation’s website.
+2. **Configure the collection.** The organisation selects a suitable once-off, fixed-term, ongoing, ad hoc, or variable-amount pattern and configures its billing cycle.
+3. **Submit collections using a payment rail.** Recurv describes card payments and EFT debit orders. The customer can authorise collections using the available payment method that suits the organisation’s process.
+4. **Monitor status and exceptions.** Recurv describes status updates, retry logic, billing-cycle insights, and surfacing failed collections or mandate issues that may need follow-up. A retry does not guarantee that a payment will succeed; retry rules and timing depend on the service configuration.
+5. **Reconcile and report.** Recurv describes automatically matching collections with payment outcomes and providing reporting and visibility into billing-cycle results. The public site also describes exporting collection data for accounting or CRM systems, or connecting through its API for real-time data synchronisation.
+
+This is a high-level summary of the public product description, not a promise that every organisation has the same setup or that every collection succeeds.
+
+## Operational visibility
+
+Recurv describes dashboards and billing-cycle views that show collection outcomes and help teams identify failed transactions, mandate issues, or other items requiring intervention. Automated reconciliation and reporting are intended to let back-office teams focus follow-up on exceptions rather than manually matching every successful payment.
+
+The homepage describes reporting, collection-data exports, and an API for real-time data synchronisation. The [API overview](https://recurv.tech/api-docs) describes the product API; arrange access to the full reference and sandbox with the Recurv team.
+
+## Payment, pricing, and product details
+
+Recurv’s public site describes card payments and EFT debit orders. It describes pricing as something the team will discuss with prospective customers; this file does not state prices, fees, or contract terms. The site also does not establish universal settlement times, retry schedules, eligibility requirements, or service-level guarantees in this summary. Ask Recurv about these details for a specific organisation.
+
+## Useful pages
+
+- [Homepage](https://recurv.tech/) — product overview, collection patterns, payment rails, visibility, and security information.
+- [Industries](https://recurv.tech/industries) — index of published industry use cases.
+- [Collection API overview](https://recurv.tech/api-docs) — public overview of API capabilities; contact Recurv for the full reference and sandbox access.
+- [Online demo](https://recurv.tech/demo) — product walkthrough.
+- [Book a live demo](https://clickmoddevptyltd.pipedrive.com/scheduler/1evWEpiG/clickmoddev-pty-ltd-recurv) — schedule a walkthrough with the team.
+- [Contact Recurv](https://recurv.tech/contactus) — discuss a specific collection workflow, pricing, or product requirements.
+- [Blog](https://recurv.tech/blog) — articles on payment operations and collection use cases.
