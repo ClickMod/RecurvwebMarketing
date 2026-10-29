@@ -7,7 +7,6 @@ import { DashboardSection } from "@/components/home/DashboardSection";
 import { IndustriesSection } from "@/components/home/IndustriesSection";
 import { BlogSection } from "@/components/home/BlogSection";
 import { SecuritySection } from "@/components/home/SecuritySection";
-import { StatsSection } from "@/components/home/StatsSection";
 import { CtaSection } from "@/components/home/CtaSection";
 import { HomepageFaqSection, HOMEPAGE_FAQS } from "@/components/home/HomepageFaqSection";
 import { buildFaqPageJsonLd } from "@/lib/seo";
@@ -61,7 +60,6 @@ export default async function Home() {
       <BlogSection posts={blogPosts} />
       <SecuritySection />
       <HomepageFaqSection />
-      <StatsSection />
       <CtaSection />
     </>
   );

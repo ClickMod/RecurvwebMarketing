@@ -1,6 +1,12 @@
-import Link from "next/link";
+import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { theme as t } from "@/components/theme";
+import {
+  SPEAK_TO_SALES_HREF,
+  SPEAK_TO_SALES_LABEL,
+  VIEW_DEMO_LABEL,
+  VIEW_DEMO_PATH,
+} from "@/lib/site-cta";
 
 export const HOMEPAGE_FAQS = [
   {
@@ -51,10 +57,16 @@ export function HomepageFaqSection() {
                 Questions about <span style={{ color: t.primary }}>Recurv.</span>
               </h2>
               <p className="mt-5 max-w-[360px]" style={{ fontSize: 15, color: t.inkSoft, lineHeight: 1.6 }}>
-                Clear answers about authorisation, collection schedules, payment methods and reconciliation. Need to discuss your billing model?{" "}
-                <Link href="/demo" style={{ color: t.primary, textDecoration: "underline", textUnderlineOffset: 2 }}>View the online demo</Link> or{" "}
-                <Link href="/contactus" style={{ color: t.primary, textDecoration: "underline", textUnderlineOffset: 2 }}>speak with our team</Link>.
+                Clear answers about authorisation, collection schedules, payment methods and reconciliation. Need to discuss your billing model?
               </p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <Button href={VIEW_DEMO_PATH} className="w-full justify-center sm:w-auto">
+                  {VIEW_DEMO_LABEL}
+                </Button>
+                <Button variant="secondary" href={SPEAK_TO_SALES_HREF} className="w-full justify-center sm:w-auto">
+                  {SPEAK_TO_SALES_LABEL}
+                </Button>
+              </div>
             </div>
             <div>
               {HOMEPAGE_FAQS.map(({ q, a }) => (
