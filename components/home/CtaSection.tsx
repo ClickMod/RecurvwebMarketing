@@ -21,8 +21,7 @@ export function CtaSection() {
               More revenue.<br /><span style={{ color: t.primary }}>Less admin.</span>
             </h2>
             <p className="mt-6 max-w-[540px]" style={{ fontSize: 19, color: t.inkSoft, lineHeight: 1.55 }}>
-              Connect with our team to see Recurv in action. We&rsquo;ll walk you through pricing, integrations
-              and a tailored setup for your industry, usually in 30 minutes or less.
+              See how Recurv could fit your collection process. Book a live demo or speak with our team about pricing, integrations, and setup for your industry.
             </p>
           </Reveal>
           <Reveal delay={STAGGER}>

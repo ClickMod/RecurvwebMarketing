@@ -7,8 +7,9 @@ import { DashboardSection } from "@/components/home/DashboardSection";
 import { IndustriesSection } from "@/components/home/IndustriesSection";
 import { BlogSection } from "@/components/home/BlogSection";
 import { SecuritySection } from "@/components/home/SecuritySection";
-import { StatsSection } from "@/components/home/StatsSection";
 import { CtaSection } from "@/components/home/CtaSection";
+import { HomepageFaqSection, HOMEPAGE_FAQS } from "@/components/home/HomepageFaqSection";
+import { buildFaqPageJsonLd } from "@/lib/seo";
 import {
   getFeaturedIndustriesForHomepage,
   getFeaturedBlogPostsForHomepage,
@@ -24,6 +25,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
+const homepageFaqJsonLd = buildFaqPageJsonLd(HOMEPAGE_FAQS);
+
 export default async function Home() {
   const [industries, blogPosts, homepage] = await Promise.all([
     getFeaturedIndustriesForHomepage().catch(() => []),
@@ -35,6 +38,10 @@ export default async function Home() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqJsonLd) }}
+      />
       <HeroSection />
       {videoSrc && (
         <HomepageVideoSection
@@ -52,7 +59,7 @@ export default async function Home() {
       <IndustriesSection industries={industries} />
       <BlogSection posts={blogPosts} />
       <SecuritySection />
-      <StatsSection />
+      <HomepageFaqSection />
       <CtaSection />
     </>
   );
