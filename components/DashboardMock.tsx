@@ -299,9 +299,9 @@ export function DashboardMock() {
           }}
         >
           {[
-            ["ACTIVE PLANS", "1,284", "+38 wk"],
+            ["SAMPLE ACTIVE PLANS", "—", "ILLUSTRATIVE"],
             ["SAMPLE SUCCESS RATE", "—", "ILLUSTRATIVE"],
-            ["AVG. CYCLE", "28 days", "unchanged"],
+            ["SAMPLE AVG. CYCLE", "—", "ILLUSTRATIVE"],
           ].map(([l, v, d], i) => (
             <div
               key={l}
