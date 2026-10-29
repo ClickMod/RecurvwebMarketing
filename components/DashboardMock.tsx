@@ -202,7 +202,7 @@ export function DashboardMock() {
                 marginBottom: 6,
               }}
             >
-              ILLUSTRATIVE DASHBOARD PREVIEW · NOT CUSTOMER DATA
+              ILLUSTRATIVE DATA · NOT LIVE CUSTOMER DATA
             </div>
             <div style={{ display: "flex", alignItems: "baseline", gap: 14 }}>
               <span
