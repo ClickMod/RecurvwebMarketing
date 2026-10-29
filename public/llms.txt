@@ -4,7 +4,7 @@
 
 Recurv.Tech Pty Ltd operates this site at https://recurv.tech. The signed-in product is at https://app.recurv.tech. Clickmod powers the product.
 
-This file is a curated index for agents. Pages are HTML; there are no separate Markdown copies. Read this file, then open only the links you need. Industry pages and blog posts are published from a CMS and change without a code deploy, so use the index pages rather than assuming a fixed list of articles.
+This file is a curated index for agents. Pages are HTML; there are no separate Markdown copies. Read this file, then open only the links you need. Industry pages and blog posts are published from a CMS and change without a code deploy, so use the index pages rather than assuming a fixed list of articles. For fuller context on Recurv’s service, audience, collection patterns, and workflow, see [llms-full.txt](https://recurv.tech/llms-full.txt).
 
 Collections run on card payments and SARB-compliant EFT debit orders. Recurv is PCI DSS Level 1. Collection patterns on the home page are once-off, fixed-term, ongoing, ad hoc fees, and variable amounts. Pricing is not published; sales quotes it.
 
