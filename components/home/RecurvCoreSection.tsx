@@ -6,11 +6,11 @@ import { SiteIcon } from "@/components/ui/SiteIcon";
 import { theme as t, iconSize } from "@/components/theme";
 
 const FEATURES = [
-  { num: "01", icon: FileCheck, title: "Reduce manual collection work", desc: "Customers authorise payments digitally, and your team can set collection schedules for once-off, fixed-term, ongoing or variable amounts. Recurv brings these steps into a payment collection workflow with reporting and reconciliation." },
+  { num: "01", icon: FileCheck, title: "Reduce manual collection work", desc: "Customers authorise payments digitally, and your team can set schedules for single payments, fixed term plans, ongoing collections or changing amounts. Recurv brings these steps together with reporting and reconciliation." },
   { num: "02", icon: Wallet, title: "Collect and monitor", desc: "Recurv handles payment processing, status updates, configured retries and reconciliation. Your team can review collection outcomes and focus on exceptions that need attention." },
-  { num: "03", icon: GitMerge, title: "Reconcile and resolve", desc: "Recurv matches collections with payment outcomes and provides billing-cycle reporting, helping your back-office team prioritise failed payments and other exceptions." },
-  { num: "04", icon: ShieldCheck, title: "Digital payment authorisation", desc: "Customers can authorise recurring or once-off collections through a digital mandate. Send an approval link by email, SMS, WhatsApp or QR code, or embed the mandate experience on your website." },
-  { num: "05", icon: TrendingUp, title: "See collection outcomes", desc: "Review billing-cycle results, collection statuses and failed payments that need follow-up. Recurv’s reporting helps your team understand what was collected and what requires attention." },
+  { num: "03", icon: GitMerge, title: "Reconcile and resolve", desc: "Recurv matches collections with payment outcomes and provides reports for each billing cycle. Your back office team can prioritise failed payments and other exceptions." },
+  { num: "04", icon: ShieldCheck, title: "Digital payment authorisation", desc: "Customers can authorise recurring or single payments through a digital mandate. Send an approval link by email, SMS, WhatsApp or QR code, or embed the mandate experience on your website." },
+  { num: "05", icon: TrendingUp, title: "See collection outcomes", desc: "Review billing cycle results, collection statuses and failed payments that need follow up. Recurv’s reports help your team see what was collected and what needs attention." },
 ] as const;
 
 export function RecurvCoreSection() {
@@ -38,7 +38,7 @@ export function RecurvCoreSection() {
             </Reveal>
             <Reveal delay={STAGGER}>
               <p style={{ fontSize: 17, color: t.inkSoft, lineHeight: 1.6, margin: 0 }}>
-                Recurv helps South African organisations—including golf clubs, schools, sports clubs and property managers—manage payments from digital authorisation through collection and reconciliation. Your team can configure collection schedules, monitor outcomes, and focus follow-up on failed transactions or mandate issues. Recurv also provides reporting and an audit trail for back-office visibility.
+                Recurv helps South African organisations such as golf clubs, schools, sports clubs and property managers manage payments from digital authorisation through collection and reconciliation. Your team can set collection schedules, monitor outcomes and focus on failed transactions or mandate issues. Reporting and an audit trail give your back office clear visibility.
               </p>
             </Reveal>
           </div>

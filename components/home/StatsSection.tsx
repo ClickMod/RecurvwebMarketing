@@ -4,10 +4,10 @@ import { STAGGER } from "@/components/motion";
 import { theme as t } from "@/components/theme";
 
 const STATS: [string, string][] = [
-  ["Once-off", "Collect a single payment for a one-time charge"],
-  ["Fixed-term", "Schedule a defined number of collections"],
-  ["Ongoing", "Continue collections without a predefined end date"],
-  ["Variable amount", "Update the collection amount before a run"],
+  ["Single payment", "Collect one payment for a single charge"],
+  ["Fixed term", "Schedule a set number of collections"],
+  ["Ongoing", "Continue collections without a set end date"],
+  ["Variable amount", "Update the amount before a collection run"],
 ];
 
 export function StatsSection() {

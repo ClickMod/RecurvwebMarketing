@@ -5,35 +5,35 @@ import { theme as t } from "@/components/theme";
 export const HOMEPAGE_FAQS = [
   {
     q: "What is Recurv?",
-    a: "Recurv is a South African payment collection platform for organisations that collect recurring or once-off payments. It manages digital authorisation, collection scheduling, card and EFT debit-order collections, retries and reconciliation, with visibility into collection outcomes and exceptions.",
+    a: "Recurv is a South African payment collection platform for organisations that collect recurring or single payments. It manages digital authorisation, collection schedules, card and EFT debit order collections, retries and reconciliation. Your team can see collection outcomes and focus on exceptions."
   },
   {
     q: "How do customers authorise collections?",
-    a: "Customers authorise recurring or once-off collections through a digital mandate. Recurv can send an approval link by email, SMS, WhatsApp or QR code, or the organisation can embed the mandate experience on its website.",
+    a: "Customers authorise recurring or single payments through a digital mandate. Recurv can send an approval link by email, SMS, WhatsApp or QR code, or your organisation can embed the mandate experience on its website."
   },
   {
     q: "What collection schedules does Recurv support?",
-    a: "Recurv describes once-off collections, fixed-term instalments, ongoing collections without a set end date, ad hoc charges added to an active collection, and variable amounts that can be updated before a collection run. Ask Recurv about configuration requirements for your billing model.",
+    a: "Recurv supports single payments, fixed term instalments, ongoing collections with no set end date, additional charges to an active collection, and amounts that can change before a collection run. Set the schedule to fit your billing model."
   },
   {
     q: "Which payment methods does Recurv support?",
-    a: "Recurv describes card payments and EFT debit orders. The available method and collection setup depend on the organisation’s process and customer authorisation.",
+    a: "Recurv supports card payments and EFT debit orders. Customers can authorise collections using either method."
   },
   {
     q: "What happens when a collection fails?",
-    a: "Recurv describes retry logic and billing-cycle monitoring. Failed collections and mandate issues that need intervention are surfaced for review. The public product information does not specify a universal retry count, timing or guarantee of successful collection.",
+    a: "Recurv retries unsuccessful collections and monitors each billing cycle. Your team can review failed collections and mandate issues that need attention."
   },
   {
     q: "How does Recurv reconcile payments?",
-    a: "Recurv matches collections with payment outcomes and provides billing-cycle reporting. This helps the organisation review what was collected and focus follow-up on failed transactions or other exceptions.",
+    a: "Recurv matches collections with payment outcomes and provides reports for each billing cycle. Your team can see what was collected and focus follow up on failed transactions or other exceptions."
   },
   {
     q: "Can Recurv connect to our accounting or CRM system?",
-    a: "Recurv describes exporting collection data for accounting or CRM systems and offers an API for real-time data synchronisation. Ask the Recurv team whether your specific system and workflow are supported.",
+    a: "Yes. Export collection data to your accounting or CRM system, or connect through Recurv’s API for real time data synchronisation. Contact our team to confirm support for your system and workflow."
   },
   {
     q: "How can we learn about pricing and setup?",
-    a: "Recurv invites organisations to book a demo or speak with sales to discuss pricing, integrations and a setup for their industry. Pricing and configuration details are discussed with the Recurv team.",
+    a: "Book a demo or speak with our team about pricing, integrations and a setup for your industry. Our team can explain the available options."
   },
 ];
 

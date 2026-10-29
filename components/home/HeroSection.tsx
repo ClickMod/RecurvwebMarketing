@@ -38,7 +38,7 @@ export function HeroSection() {
                 className="mt-8 max-w-[560px]"
                 style={{ fontSize: 19, lineHeight: 1.55, color: t.inkSoft }}
               >
-                Recurv is a South African payment collection platform for organisations that collect recurring or once-off payments. It manages digital authorisation, collection schedules, card and EFT debit-order collections, retries and reconciliation—so your team can see outcomes and focus on payments that need attention.
+                Recurv is a South African payment collection platform for organisations that collect recurring or single payments. It manages digital authorisation, collection schedules, card and EFT debit order collections, retries and reconciliation. Your team can see collection outcomes and focus on payments that need attention.
               </p>
             </Reveal>
             <Reveal delay={STAGGER * 2}>

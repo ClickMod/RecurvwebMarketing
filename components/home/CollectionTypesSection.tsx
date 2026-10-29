@@ -6,11 +6,11 @@ import { SiteIcon } from "@/components/ui/SiteIcon";
 import { theme as t, iconSize } from "@/components/theme";
 
 const COLLECTION_TYPES = [
-  { icon: Zap, title: "Once-off collection", desc: "Collect a single payment and close the instruction. Ideal for deposits, registration fees or any charge that only needs to happen once.", use: "Deposit · registration fee" },
-  { icon: Calendar, title: "Fixed-term collections", desc: "Set a defined number of collections, say 10 monthly installments and Recurv stops automatically when the term ends.", use: "10 monthly installments" },
-  { icon: Repeat, title: "Ongoing collections", desc: "Set it once. Collect automatically. With no end date required, collections continue on schedule until cancelled, eliminating the need to recreate payment plans or manage renewals manually.", use: "Memberships · Rent" },
-  { icon: Wallet, title: "Ad hoc fees", desc: "Add a once-off charge to any active collection. For a callout fee, admin cost or event ticket without disrupting the schedule. It collects once, then drops off.", use: "admin fee · event fee" },
-  { icon: TrendingUp, title: "Variable amounts", desc: "Collect a different amount each month. Set a variable rate and update it before each collection run. Useful for usage-based billing and levy adjustments.", use: "Levy adjustments · utilities" },
+  { icon: Zap, title: "Single payment", desc: "Collect one payment and close the instruction. Suitable for deposits, registration fees or other single charges.", use: "Deposit · registration fee" },
+  { icon: Calendar, title: "Fixed term collections", desc: "Choose the number of collections, such as 10 monthly instalments. Recurv stops collections automatically when the term ends.", use: "10 monthly instalments" },
+  { icon: Repeat, title: "Ongoing collections", desc: "Set it once and collections continue on schedule until cancelled. There is no end date, so you do not need to recreate payment plans or manage renewals manually.", use: "Memberships · Rent" },
+  { icon: Wallet, title: "Additional charges", desc: "Add a single charge to an active collection, such as a callout fee, admin fee or event ticket. It is collected once without changing the schedule.", use: "Admin fee · event fee" },
+  { icon: TrendingUp, title: "Variable amounts", desc: "Set a variable amount and update it before each collection run. Useful for usage based billing and levy adjustments.", use: "Levy adjustments · utilities" },
 ] as const;
 
 export function CollectionTypesSection() {
@@ -40,7 +40,7 @@ export function CollectionTypesSection() {
           </Reveal>
           <Reveal delay={STAGGER}>
             <p style={{ fontSize: 17, color: t.inkSoft, lineHeight: 1.6, margin: 0 }}>
-            Recurv supports several collection patterns for South African organisations: once-off payments, fixed-term instalments, ongoing collections, ad hoc charges, and variable amounts. Choose a pattern that fits your billing model, then review collection outcomes and exceptions through the platform. Ask the Recurv team about configuration requirements for your specific process.
+            Recurv supports several ways to collect payments for South African organisations. Choose single payments, fixed term instalments, ongoing collections, additional charges or amounts that change over time. Review outcomes and exceptions in the platform. Contact our team to discuss the setup for your process.
             </p>
           </Reveal>
         </div>
@@ -109,13 +109,13 @@ export function CollectionTypesSection() {
               <span style={{ color: "#A89BF0" }}>order collections.</span>
             </h2>
             <p className="mt-6 max-w-[480px]" style={{ fontSize: 16, color: t.inkOnDeepSoft, lineHeight: 1.6 }}>
-              Recurv supports card payments and EFT debit orders for collections. Customers can authorise using the available payment method that fits the organisation’s collection process. Actual payment outcomes vary by instruction.
+              Customers can authorise collections by card or EFT debit order, depending on your organisation’s collection process. Payment outcomes depend on each instruction.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {([
-              { icon: CreditCard, title: "Card payments", desc: "Customers can authorise collections by card. Recurv describes retry logic as part of its collection process; ask the team about the rules for your setup." },
-              { icon: FileCheck, title: "EFT debit orders", desc: "Collect using EFT debit-order rails described by Recurv as SARB compliant. Retry behavior depends on the configured collection process." },
+              { icon: CreditCard, title: "Card payments", desc: "Customers can authorise collections by card. Recurv can retry unsuccessful collections according to the rules set for your account." },
+              { icon: FileCheck, title: "EFT debit orders", desc: "Collect payments by EFT debit order. Retry behaviour depends on your account settings." },
             ] as const).map((r) => (
               <div
                 key={r.title}
