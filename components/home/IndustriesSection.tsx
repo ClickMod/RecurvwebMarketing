@@ -48,7 +48,7 @@ export function IndustriesSection({ industries }: IndustriesSectionProps) {
           </Reveal>
           <Reveal delay={STAGGER}>
             <div className="flex flex-col-reverse md:flex-col items-start md:items-end gap-3 pb-1">
-              <div className="mono" style={{ fontSize: 11, color: t.inkSoft, letterSpacing: 1 }}>R 30.6M COLLECTED / MONTH</div>
+              <div className="mono" style={{ fontSize: 11, color: t.inkSoft, letterSpacing: 1 }}>PAYMENT COLLECTION USE CASES</div>
               <Button variant="secondary" href="/industries" className="w-full md:w-auto justify-center">All industries →</Button>
             </div>
           </Reveal>

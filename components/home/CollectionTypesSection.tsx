@@ -40,9 +40,7 @@ export function CollectionTypesSection() {
           </Reveal>
           <Reveal delay={STAGGER}>
             <p style={{ fontSize: 17, color: t.inkSoft, lineHeight: 1.6, margin: 0 }}>
-            Every business has its own billing model, and no two customers are exactly the same. Recurv is built around that reality.
-            Whether you're collecting a once-off payment, fixed-term instalments, ongoing subscriptions, ad hoc charges or variable monthly amounts, you can configure every collection exactly the way your business needs it.
-            No custom development, spreadsheets or workarounds, just complete flexibility from a single platform.
+            Recurv supports several collection patterns for South African organisations: once-off payments, fixed-term instalments, ongoing collections, ad hoc charges, and variable amounts. Choose a pattern that fits your billing model, then review collection outcomes and exceptions through the platform. Ask the Recurv team about configuration requirements for your specific process.
             </p>
           </Reveal>
         </div>
@@ -107,19 +105,17 @@ export function CollectionTypesSection() {
               letterSpacing: "-0.035em",
               margin: 0,
             }}>
-              Card or EFT debit order,<br />
-              <span style={{ color: "#A89BF0" }}>your customer&rsquo;s choice.</span>
+              Card and EFT debit<br />
+              <span style={{ color: "#A89BF0" }}>order collections.</span>
             </h2>
             <p className="mt-6 max-w-[480px]" style={{ fontSize: 16, color: t.inkOnDeepSoft, lineHeight: 1.6 }}>
-              Recurv runs on both card payment rails and EFT debit orders, so your customers can authorise
-              collections the way that works for them. More options means fewer drop-offs at authorisation
-              and a higher first-attempt success rate across your book.
+              Recurv supports card payments and EFT debit orders for collections. Customers can authorise using the available payment method that fits the organisation’s collection process. Actual payment outcomes vary by instruction.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {([
-              { icon: CreditCard, title: "Card payments", desc: "Fast authorisation, broad customer reach. Customers authorise via card, revenue collected against card with intelligent retry logic." },
-              { icon: FileCheck, title: "EFT Debit orders", desc: "The trusted South African standard. SARB-compliant debit order rails and intelligent retry logic." },
+              { icon: CreditCard, title: "Card payments", desc: "Customers can authorise collections by card. Recurv describes retry logic as part of its collection process; ask the team about the rules for your setup." },
+              { icon: FileCheck, title: "EFT debit orders", desc: "Collect using EFT debit-order rails described by Recurv as SARB compliant. Retry behavior depends on the configured collection process." },
             ] as const).map((r) => (
               <div
                 key={r.title}

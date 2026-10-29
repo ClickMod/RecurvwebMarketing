@@ -4,10 +4,10 @@ import { STAGGER } from "@/components/motion";
 import { theme as t } from "@/components/theme";
 
 const STATS: [string, string][] = [
-  ["R 2M+", "Collected monthly across the platform"],
-  ["98.6%", "First-attempt collection success"],
-  ["< 1 day", "Median time from signup to first live collection"],
-  ["240+", "South African teams running Recurv"],
+  ["Once-off", "Collect a single payment for a one-time charge"],
+  ["Fixed-term", "Schedule a defined number of collections"],
+  ["Ongoing", "Continue collections without a predefined end date"],
+  ["Variable amount", "Update the collection amount before a run"],
 ];
 
 export function StatsSection() {

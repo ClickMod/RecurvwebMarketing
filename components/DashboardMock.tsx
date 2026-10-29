@@ -176,7 +176,7 @@ export function DashboardMock() {
             className="mono"
             style={{ fontSize: 11, color: t.inkSoft, letterSpacing: 0.5 }}
           >
-            LIVE · ZAR
+            SAMPLE DASHBOARD · ZAR
           </span>
         </div>
       </div>
@@ -202,7 +202,7 @@ export function DashboardMock() {
                 marginBottom: 6,
               }}
             >
-              COLLECTED · MARCH 2026
+              ILLUSTRATIVE DASHBOARD PREVIEW · NOT CUSTOMER DATA
             </div>
             <div style={{ display: "flex", alignItems: "baseline", gap: 14 }}>
               <span
@@ -300,7 +300,7 @@ export function DashboardMock() {
         >
           {[
             ["ACTIVE PLANS", "1,284", "+38 wk"],
-            ["SUCCESS RATE", "98.6%", "+0.4 pt"],
+            ["SAMPLE SUCCESS RATE", "—", "ILLUSTRATIVE"],
             ["AVG. CYCLE", "28 days", "unchanged"],
           ].map(([l, v, d], i) => (
             <div
